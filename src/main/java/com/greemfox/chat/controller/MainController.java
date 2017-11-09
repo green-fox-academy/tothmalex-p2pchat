@@ -13,10 +13,4 @@ public class MainController {
     public String openingMain(  ) {
         return "index";
     }
-
-    @GetMapping("/enter")
-    public String add(Model model){
-        model.addAttribute("message", new User());
-        return "enter";
-    }
 }
