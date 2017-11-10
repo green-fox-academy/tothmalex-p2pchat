@@ -1,4 +1,4 @@
-package com.greemfox.chat;
+package com.greenfox.chat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
