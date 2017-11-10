@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping
+@RequestMapping("/chat")
 public class MainController {
 
     @Autowired
@@ -19,13 +19,13 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/message")
+   /* @GetMapping("/message")
     public Message list( @RequestParam("messag") String message){
         Message mess = new Message(message);
         chatRepo.save(mess);
         return mess;
     }
-
+*/
     /*@PostMapping({"/","list"})
     public String save(@ModelAttribute Post post){
         postRepo.save(post);
