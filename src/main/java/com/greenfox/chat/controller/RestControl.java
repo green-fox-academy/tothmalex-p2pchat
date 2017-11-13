@@ -15,6 +15,6 @@ public class RestControl {
 
     @GetMapping("/alex")
     public void log( HttpServletRequest request, Exception exception) {
-        logService.checkEnvironment(request, exception);
+        logService.checkEnvironment(request);
     }
 }

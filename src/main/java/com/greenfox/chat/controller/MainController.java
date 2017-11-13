@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class MainController {
 
     @Autowired
@@ -21,19 +21,19 @@ public class MainController {
 
     @GetMapping("/index")
     public String index( HttpServletRequest request, Exception exception) {
-        logService.checkEnvironment(request, exception);
+        logService.checkEnvironment(request);
         return "index";
     }
 
     @GetMapping("/enter")
     public String enter(HttpServletRequest request, Exception exception) {
-        logService.checkEnvironment(request, exception);
+        logService.checkEnvironment(request);
         return "enter";
     }
 
     @PostMapping("/registeruser")
     public String enterUser(HttpServletRequest request, Exception exception, @RequestParam String userName) {
-        logService.checkEnvironment(request, exception);
+        logService.checkEnvironment(request);
         userRepo.save(new ChatUser(userName));
         return "redirect:/index";
     }
