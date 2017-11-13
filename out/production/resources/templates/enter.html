@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>Enter Name</title>
 </head>
 <body>
-<h1> Enter </h1>
-<form th:text="Choose your name:" action="@{/posts/}" method="post" th:object="${post}" class="form-horizontal">
-    <input type="text" value="title" th:field="*{title}"/>
-    <button type="submit">Enter</button>
+<h1>Enter</h1>
+
+<!--<form action="/registerUser" method="post">
+    <input name="userName"/>
+    <br /> <button type="submit" value="Submit" th:text="'Choose your name'"></button>
+</form>-->
+
+<form action="#" th:action="@{/registerser}" th:object="${userName}" method="post">
+    <p>Enter your username: <input type="text" th:field="*{userName}" />
+        <input type="submit" value="Enter" />
 </form>
+
 </body>
 </html>

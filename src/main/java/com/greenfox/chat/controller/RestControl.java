@@ -13,7 +13,7 @@ public class RestControl {
     @Autowired
     LogService logService;
 
-    @GetMapping("/")
+    @GetMapping("/alex")
     public void log( HttpServletRequest request, Exception exception) {
         logService.checkEnvironment(request, exception);
     }

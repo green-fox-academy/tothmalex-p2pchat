@@ -1,6 +1,6 @@
 package com.greenfox.chat.controller;
 
-import com.greenfox.chat.model.User;
+import com.greenfox.chat.model.ChatUser;
 import com.greenfox.chat.repository.UserRepo;
 import com.greenfox.chat.serrvice.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class MainController {
     @PostMapping("/registeruser")
     public String enterUser(HttpServletRequest request, Exception exception, @RequestParam String userName) {
         logService.checkEnvironment(request, exception);
-        userRepo.save(new User(userName));
+        userRepo.save(new ChatUser(userName));
         return "redirect:/index";
     }
 }

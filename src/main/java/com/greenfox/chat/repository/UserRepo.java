@@ -1,6 +1,6 @@
 package com.greenfox.chat.repository;
 
-import com.greenfox.chat.model.User;
+import com.greenfox.chat.model.ChatUser;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepo extends CrudRepository<User, Long> {}
+public interface UserRepo extends CrudRepository<ChatUser, Long> {}
