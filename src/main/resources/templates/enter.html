@@ -7,9 +7,14 @@
 <body>
 <h1>Enter</h1>
 
-<form action="/registerUser" method="post">
+<!--<form action="/registerUser" method="post">
     <input name="userName"/>
     <br /> <button type="submit" value="Submit" th:text="'Choose your name'"></button>
+</form>-->
+
+<form action="#" th:action="@{/registerser}" th:object="${userName}" method="post">
+    <p>Enter your username: <input type="text" th:field="*{userName}" />
+        <input type="submit" value="Enter" />
 </form>
 
 </body>

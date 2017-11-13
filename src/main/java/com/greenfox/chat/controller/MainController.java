@@ -31,7 +31,7 @@ public class MainController {
         return "enter";
     }
 
-    @PostMapping("/registerUser")
+    @PostMapping("/registeruser")
     public String enterUser(HttpServletRequest request, Exception exception, @RequestParam String userName) {
         logService.checkEnvironment(request, exception);
         userRepo.save(new User(userName));
