@@ -20,18 +20,33 @@ public class MainController {
     @Autowired
     LogService logService;
 
-    @PostMapping("/entering")
+    @PostMapping("/registeruser")
     public String enter( @ModelAttribute ChatUser user, Model model, HttpServletRequest request) {
+        logService.checkEnvironment(request);
         if (user.getUserName().equals("")) {
             model.addAttribute("errorMessage", "Please enter a username!");
             return "redirect:/enter";
         }
         for (ChatUser u : userRepo.findAll()) {
             if (u.getUserName().equals(user.getUserName())) {
-                return "redirect:/index?userId=" + u.getUserId();
+                return "redirect:/index";
             }
         }
         return "redirect:/";
+    }
+
+    //?userId=" + u.getUserId()
+
+    @PostMapping("/registeruser2")
+    public String enterUser( HttpServletRequest request, @RequestParam String userName ) {
+        logService.checkEnvironment(request);
+        if (userName == null) {
+
+            return "redirect:/enter";
+        } else {
+            userRepo.save(new ChatUser(userName));
+            return "redirect:/index";
+        }
     }
 
     @GetMapping("/index")
@@ -46,15 +61,5 @@ public class MainController {
         return "enter";
     }
 
-    @PostMapping("/registeruser")
-    public String enterUser( HttpServletRequest request, @RequestParam String userName ) {
-        logService.checkEnvironment(request);
-        if (userName == null) {
 
-            return "redirect:/enter";
-        } else {
-            userRepo.save(new ChatUser(userName));
-            return "redirect:/index";
-        }
-    }
 }
