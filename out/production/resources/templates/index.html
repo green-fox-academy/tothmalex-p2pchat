@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>P2P Chat</title>
 </head>
 <body>
 <h1> Peer To Peer Chat program</h1>
+<form th:action="@{/update}">
+    <label for="Your username">Your username:</label>
+    <input type="text" id="Your username" name="userName" th:placeholder="${user} != null ? ${user.getUserName()} : ''"/>
+    <button type="submit">update</button>
+</form>
 </body>
 </html>

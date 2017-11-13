@@ -2,21 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/style.css}" />
     <title>Enter Name</title>
 </head>
 <body>
-<h1>Enter</h1>
 
-<!--<form action="/registerUser" method="post">
+<h1>Enter</h1>
+<form action="/registeruser" method="post">
+    <label for="username">Choose your name: </label>
+    <input type="text" id="username" name="userName"/>
+    <button type="submit">Enter</button>
+</form>
+
+
+
+<!--<form action="/registeruser" method="post">
     <input name="userName"/>
     <br /> <button type="submit" value="Submit" th:text="'Choose your name'"></button>
 </form>-->
 
-<form action="#" th:action="@{/registeruser}" th:object="${userName}" method="post">
-    <p>Enter your username: <input type="text" th:field="*{userName}" />
+<!--<form action="#" th:action="@{/registeruser}" th:object="${user}" method="post">
+    Enter your username: <input type="text" th:field="*{userName}" />
         <button type="submit" value="Enter"></button>
-    </p>
-</form>
-
+</form>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

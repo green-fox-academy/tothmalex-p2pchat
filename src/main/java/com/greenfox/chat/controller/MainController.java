@@ -5,6 +5,7 @@ import com.greenfox.chat.repository.UserRepo;
 import com.greenfox.chat.serrvice.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,22 +20,41 @@ public class MainController {
     @Autowired
     LogService logService;
 
+    @PostMapping("/entering")
+    public String enter( @ModelAttribute ChatUser user, Model model, HttpServletRequest request) {
+        if (user.getUserName().equals("")) {
+            model.addAttribute("errorMessage", "Please enter a username!");
+            return "redirect:/enter";
+        }
+        for (ChatUser u : userRepo.findAll()) {
+            if (u.getUserName().equals(user.getUserName())) {
+                return "redirect:/index?userId=" + u.getUserId();
+            }
+        }
+        return "redirect:/";
+    }
+
     @GetMapping("/index")
-    public String index( HttpServletRequest request, Exception exception) {
+    public String index( HttpServletRequest request ) {
         logService.checkEnvironment(request);
         return "index";
     }
 
     @GetMapping("/enter")
-    public String enter(HttpServletRequest request, Exception exception) {
+    public String enter( HttpServletRequest request ) {
         logService.checkEnvironment(request);
         return "enter";
     }
 
     @PostMapping("/registeruser")
-    public String enterUser(HttpServletRequest request, Exception exception, @RequestParam String userName) {
+    public String enterUser( HttpServletRequest request, @RequestParam String userName ) {
         logService.checkEnvironment(request);
-        userRepo.save(new ChatUser(userName));
-        return "redirect:/index";
+        if (userName == null) {
+
+            return "redirect:/enter";
+        } else {
+            userRepo.save(new ChatUser(userName));
+            return "redirect:/index";
+        }
     }
 }
