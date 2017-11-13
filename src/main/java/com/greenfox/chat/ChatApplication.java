@@ -1,7 +1,7 @@
 package com.greenfox.chat;
 
-import com.greenfox.chat.model.Message;
 import com.greenfox.chat.repository.ChatRepo;
+import com.greenfox.chat.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ChatApplication implements CommandLineRunner{
 
 	@Autowired
+	UserRepo userRepo;
+
+	@Autowired
 	ChatRepo chatRepo;
 
 	public static void main(String[] args) {
@@ -18,8 +21,6 @@ public class ChatApplication implements CommandLineRunner{
 	}
 
 	@Override
-	public void run( String... args ) throws Exception {
-		Message mess = new Message("message");
-		chatRepo.save(mess);
+	public void run(String... args) throws Exception {
 	}
 }

@@ -1,34 +1,40 @@
 package com.greenfox.chat.controller;
 
-import com.greenfox.chat.model.Message;
-import com.greenfox.chat.repository.ChatRepo;
+import com.greenfox.chat.model.User;
+import com.greenfox.chat.repository.UserRepo;
+import com.greenfox.chat.serrvice.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
-@RequestMapping("/chat")
+@RequestMapping("/")
 public class MainController {
 
     @Autowired
-    ChatRepo chatRepo;
+    UserRepo userRepo;
 
-    @GetMapping({"/"})
-    public String openingMain(  ) {
+    @Autowired
+    LogService logService;
+
+    @GetMapping("/index")
+    public String index( HttpServletRequest request, Exception exception) {
+        logService.checkEnvironment(request, exception);
         return "index";
     }
 
-   /* @GetMapping("/message")
-    public Message list( @RequestParam("messag") String message){
-        Message mess = new Message(message);
-        chatRepo.save(mess);
-        return mess;
+    @GetMapping("/enter")
+    public String enter(HttpServletRequest request, Exception exception) {
+        logService.checkEnvironment(request, exception);
+        return "enter";
     }
-*/
-    /*@PostMapping({"/","list"})
-    public String save(@ModelAttribute Post post){
-        postRepo.save(post);
-        return "redirect:/posts";
-    }*/
+
+    @PostMapping("/registerUser")
+    public String enterUser(HttpServletRequest request, Exception exception, @RequestParam String userName) {
+        logService.checkEnvironment(request, exception);
+        userRepo.save(new User(userName));
+        return "redirect:/index";
+    }
 }
