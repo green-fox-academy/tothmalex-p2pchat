@@ -12,9 +12,10 @@
     <br /> <button type="submit" value="Submit" th:text="'Choose your name'"></button>
 </form>-->
 
-<form action="#" th:action="@{/registerser}" th:object="${userName}" method="post">
+<form action="#" th:action="@{/registeruser}" th:object="${userName}" method="post">
     <p>Enter your username: <input type="text" th:field="*{userName}" />
-        <input type="submit" value="Enter" />
+        <button type="submit" value="Enter"></button>
+    </p>
 </form>
 
 </body>
