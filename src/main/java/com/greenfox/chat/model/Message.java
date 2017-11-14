@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.util.Random;
 
 @Entity
 public class Message {
@@ -15,19 +16,20 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    String message;
+
     String userName;
     String text;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    int specialid = (int )(Math.random() * 9999999 + 1000000);
 
     public Message() {
     }
 
-    public Message( String message, String userName, String text, Timestamp timestamp ) {
-        this.message = message;
+    public Message( String userName, String text, Timestamp timestamp, int specialid ) {
         this.userName = userName;
         this.text = text;
         this.timestamp = timestamp;
+        this.specialid = specialid;
     }
 
     public long getId() {
@@ -38,12 +40,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getMessage() {
-        return message;
+    public int getSpecialid() {
+        return specialid;
     }
 
-    public void setMessage( String message ) {
-        this.message = message;
+    public void setSpecialid( int specialid ) {
+        this.specialid = specialid;
     }
 
     public String getUserName() {

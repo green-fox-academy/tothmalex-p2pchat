@@ -64,7 +64,7 @@ public class MainController {
 
     @PostMapping("/addMessage")
     public String addMessage(@ModelAttribute Message message, Model model) {
-        message.setUsername(userRepo.findOne(1L).getUserName());
+        message.setUserName(userRepo.findOne(1L).getUserName());
         chatRepo.save(message);
         return "redirect:/index";
     }
