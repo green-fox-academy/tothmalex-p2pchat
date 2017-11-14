@@ -1,5 +1,8 @@
 package com.greenfox.chat.model;
 
+import com.greenfox.chat.repository.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

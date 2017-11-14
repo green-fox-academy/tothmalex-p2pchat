@@ -9,6 +9,28 @@
 <body>
 <h1> Peer To Peer Chat program</h1>
 
+
+<p>Your username: </p>
+
+<form th:action="@{/updateUserName}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="text" th:field="*{name}" th:value="${user.userName}" name="name"/>
+    <button type="submit" value="Submit">Change</button>
+</form>
+
+<form th:action="@{/addMessage}" th:object="${newMessage}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="text" th:field="*{text}" name="name"/>
+    <button type="submit" value="Submit">Send</button>
+</form>
+
+<th:block th:each="message : ${messages}">
+    <tr>
+        <td th:text="${message.text}">...</td>
+        <td th:text="${message.username}">...</td>
+    </tr>
+</th:block>
+
 <!--<div class="container-fluid">
     <form class="form-inline" th:action="@{/index}" th:object="${user}" method="post">
         <div class="form-group">

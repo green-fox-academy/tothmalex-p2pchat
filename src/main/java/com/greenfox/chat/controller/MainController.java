@@ -23,10 +23,6 @@ public class MainController {
     @Autowired
     LogService logService;
 
-
-
-    long id = 1;
-
     @PostMapping("/registeruser")
     public String enter( @ModelAttribute ChatUser user, Model model, HttpServletRequest request) {
         logService.checkEnvironment(request);
@@ -38,10 +34,10 @@ public class MainController {
             return "enter";
         }
         userRepo.save(user);
-        return "redirect:/index";
+        return "redirect:/";
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"/",""})
     public String getHomepage(Model model, HttpServletRequest request) {
         logService.checkEnvironment(request);
         model.addAttribute("user", userRepo.findAll());
@@ -56,4 +52,18 @@ public class MainController {
         model.addAttribute("newUser", new ChatUser());
         return "enter";
     }
+
+    @PostMapping("/updateUserName")
+    public String updateUsername(@ModelAttribute ChatUser user, HttpServletRequest request) {
+        logService.checkEnvironment(request);
+        userRepo.save(user);
+        return "redirect:/";
+    }
+
+   /* @PostMapping("/addMessage")
+    public String addMessage(@ModelAttribute Message message, Model model) {
+        message.setUsername(userRepo.findAll().getUserName());
+        chatRepo.save(message);
+        return "redirect:/";
+    }*/
 }
