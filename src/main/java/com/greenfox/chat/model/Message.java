@@ -16,7 +16,6 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-
     String userName;
     String text;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -29,6 +28,12 @@ public class Message {
         this.text = text;
     }
 
+    public Message(int id, String userName, String text, Timestamp timestamp) {
+        this.userName = userName;
+        this.text = text;
+        this.timestamp = timestamp;
+        this.id = id;
+    }
     public Message( String userName, String text, Timestamp timestamp, int specialid ) {
         this.userName = userName;
         this.text = text;
