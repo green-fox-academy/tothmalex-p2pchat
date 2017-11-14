@@ -13,40 +13,20 @@ import java.util.Random;
 public class Message {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    int specialid;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //long id;
 
     String userName;
     String text;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    int specialid = (int )(Math.random() * 9999999 + 1000000);
+    //int id = (int )(Math.random() * 9999999 + 1000000);
 
     public Message() {
     }
 
     public Message( String text) {
         this.text = text;
-    }
-
-    public Message(int id, String userName, String text, Timestamp timestamp) {
-        this.userName = userName;
-        this.text = text;
-        this.timestamp = timestamp;
-        this.id = id;
-    }
-    public Message( String userName, String text, Timestamp timestamp, int specialid ) {
-        this.userName = userName;
-        this.text = text;
-        this.timestamp = timestamp;
-        this.specialid = specialid;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId( long id ) {
-        this.id = id;
     }
 
     public int getSpecialid() {
