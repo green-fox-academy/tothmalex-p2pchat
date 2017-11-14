@@ -25,14 +25,6 @@
     <button type="submit" class="btn btn-default">Send</button>
 </form>
     </div>
-
-<th:block th:each="message : ${messages}">
-    <tr>
-        <td th:text="${message.userName}">...</td>
-        <td th:text="${message.text}">...</td>
-    </tr>
-</th:block>
-
     <ul th:each="message : ${messages}" th:object="${message}">
         <li th:text="*{userName}"/>
         <p th:text="*{text}"/>

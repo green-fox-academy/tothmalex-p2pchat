@@ -29,9 +29,11 @@ public class MainController {
     public String enter( @ModelAttribute ChatUser user, Model model, HttpServletRequest request) {
         logService.checkEnvironment(request);
         if (user.getUserName().equals("")) {
+            model.addAttribute("newUser", new ChatUser());
             model.addAttribute("errorMessage", "Add username pls");
             return "enter";
         } else if (user.getUserName().equals(userRepo.findOne(1L))) {
+            model.addAttribute("newUser", new ChatUser());
             model.addAttribute("errorMessage","This name is already occupied");
             return "enter";
         }
