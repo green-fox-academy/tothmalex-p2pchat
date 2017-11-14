@@ -28,7 +28,7 @@ public class MainController {
         if (user.getUserName().equals("")) {
             model.addAttribute("errorMessage", "Add username pls");
             return "enter";
-        } else if (user.getUserName().equals(userRepo.findOne(id).getUserName())) {
+        } else if (user.getUserName().equals(userRepo.findAll())) {
             model.addAttribute("errorMessage","This name is already occupied");
             return "enter";
         }
