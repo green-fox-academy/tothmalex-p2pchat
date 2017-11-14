@@ -18,6 +18,8 @@ public class MainController {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
     ChatRepo chatRepo;
 
     @Autowired
@@ -29,18 +31,18 @@ public class MainController {
         if (user.getUserName().equals("")) {
             model.addAttribute("errorMessage", "Add username pls");
             return "enter";
-        } else if (user.getUserName().equals(userRepo.findAll())) {
+        } else if (user.getUserName().equals(userRepo.findOne(1L))) {
             model.addAttribute("errorMessage","This name is already occupied");
             return "enter";
         }
         userRepo.save(user);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
-    @RequestMapping({"/",""})
+    @RequestMapping("/index")
     public String getHomepage(Model model, HttpServletRequest request) {
         logService.checkEnvironment(request);
-        model.addAttribute("user", userRepo.findAll());
+        model.addAttribute("user", userRepo.findOne(1L ));
         model.addAttribute("newMessage", new Message());
         model.addAttribute("messages", chatRepo.findAll());
         return "index";
@@ -57,13 +59,13 @@ public class MainController {
     public String updateUsername(@ModelAttribute ChatUser user, HttpServletRequest request) {
         logService.checkEnvironment(request);
         userRepo.save(user);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
-   /* @PostMapping("/addMessage")
+    @PostMapping("/addMessage")
     public String addMessage(@ModelAttribute Message message, Model model) {
-        message.setUsername(userRepo.findAll().getUserName());
+        message.setUsername(userRepo.findOne(1L).getUserName());
         chatRepo.save(message);
-        return "redirect:/";
-    }*/
+        return "redirect:/index";
+    }
 }

@@ -9,10 +9,11 @@
 <body>
 <div class="container-fluid">
 <h1>Enter Username</h1>
+    <p th:if="${errorMessage}" th:text="${errorMessage}"/>
 <form th:action="@{/registeruser}" th:object="${newUser}" method="post">
     <div class="form-group">
     <input type="text" th:field="*{userName}" placeholder="Enter your name here"/>
-        <p th:if="${errorMessage}" th:text="${errorMessage}"/>
+
     <button type="submit" class="btn btn-default">Enter</button>
     </div>
 </form>
