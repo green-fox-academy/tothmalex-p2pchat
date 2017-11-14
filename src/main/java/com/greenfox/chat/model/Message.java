@@ -25,6 +25,10 @@ public class Message {
     public Message() {
     }
 
+    public Message( String text) {
+        this.text = text;
+    }
+
     public Message( String userName, String text, Timestamp timestamp, int specialid ) {
         this.userName = userName;
         this.text = text;
