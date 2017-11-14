@@ -7,38 +7,17 @@
     <title>Enter Name</title>
 </head>
 <body>
-
-<!--
-<h1>Enter</h1>
-<form action="/registeruser" method="post">
-    <label for="username">Choose your name: </label>
-    <input type="text" id="username" name="userName"/>
-    <button type="submit">Enter</button>
-</form>
--->
-
 <div class="container-fluid">
-    <h1>Enter</h1>
+<h1>Enter Username</h1>
+<form th:action="@{/registeruser}" th:object="${newUser}" method="post">
+    <div class="form-group">
+    <input type="text" th:field="*{userName}" placeholder="Enter your name here"/>
+        <p th:if="${errorMessage}" th:text="${errorMessage}"/>
+    <button type="submit" class="btn btn-default">Enter</button>
+    </div>
 
-    <form class="form-inline" th:action="@{/registeruser}" th:object="${user}" method="post">
-        <div class="form-group">
-            <label>Choose your name:</label>
-            <input type="text" class="form-control" th:field="*{name}" placeholder="Your name here"/>
-            <p th:if="${errorMessage}" th:text="${errorMessage}"/>
-        </div>
-        <button type="submit" class="btn btn-default">Enter</button>
-    </form>
+</form>
 </div>
-
-<!--<form action="/registeruser" method="post">
-    <input name="userName"/>
-    <br /> <button type="submit" value="Submit" th:text="'Choose your name'"></button>
-</form>-->
-
-<!--<form action="#" th:action="@{/registeruser}" th:object="${user}" method="post">
-    Enter your username: <input type="text" th:field="*{userName}" />
-        <button type="submit" value="Enter"></button>
-</form>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

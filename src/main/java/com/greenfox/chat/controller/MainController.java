@@ -20,33 +20,20 @@ public class MainController {
     @Autowired
     LogService logService;
 
+    long id = 1;
+
     @PostMapping("/registeruser")
     public String enter( @ModelAttribute ChatUser user, Model model, HttpServletRequest request) {
         logService.checkEnvironment(request);
         if (user.getUserName().equals("")) {
-            model.addAttribute("errorMessage", "Please enter a username!");
-            return "redirect:/enter";
+            model.addAttribute("errorMessage", "Add username pls");
+            return "enter";
+        } else if (user.getUserName().equals(userRepo.findOne(id).getUserName())) {
+            model.addAttribute("errorMessage","This name is already occupied");
+            return "enter";
         }
-        for (ChatUser u : userRepo.findAll()) {
-            if (u.getUserName().equals(user.getUserName())) {
-                return "redirect:/index";
-            }
-        }
-        return "redirect:/";
-    }
-
-    //?userId=" + u.getUserId()
-
-    @PostMapping("/registeruser2")
-    public String enterUser( HttpServletRequest request, @RequestParam String userName ) {
-        logService.checkEnvironment(request);
-        if (userName == null) {
-
-            return "redirect:/enter";
-        } else {
-            userRepo.save(new ChatUser(userName));
-            return "redirect:/index";
-        }
+        userRepo.save(user);
+        return "redirect:/index";
     }
 
     @GetMapping("/index")
@@ -56,10 +43,9 @@ public class MainController {
     }
 
     @GetMapping("/enter")
-    public String enter( HttpServletRequest request ) {
+    public String enter( Model model, HttpServletRequest request ) {
         logService.checkEnvironment(request);
+        model.addAttribute("newUser", new ChatUser());
         return "enter";
     }
-
-
 }
