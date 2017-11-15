@@ -1,7 +1,6 @@
 package com.greenfox.chat.controller;
 
-import com.greenfox.chat.model.ChatUser;
-import com.greenfox.chat.model.Message;
+import com.greenfox.chat.model.*;
 import com.greenfox.chat.repository.ChatRepo;
 import com.greenfox.chat.repository.UserRepo;
 import com.greenfox.chat.serrvice.LogService;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -64,10 +64,13 @@ public class MainController {
         return "redirect:/index";
     }
 
+    @CrossOrigin("*")
     @PostMapping("/addMessage")
     public String addMessage(@ModelAttribute Message message, Model model) {
         message.setUserName(userRepo.findOne(1L).getUserName());
-        chatRepo.save(message);
+        RestTemplate restTemplate = new RestTemplate();
+        Response response = new Response(message, new Client ("Alex"));
+        Status s = restTemplate.postForObject("http://localhost:8080/api/message/receive", response, Status.class);
         return "redirect:/index";
     }
 }
