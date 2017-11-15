@@ -5,6 +5,7 @@ import com.greenfox.chat.repository.ChatRepo;
 import com.greenfox.chat.repository.UserRepo;
 import com.greenfox.chat.serrvice.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -64,13 +65,14 @@ public class MainController {
         return "redirect:/index";
     }
 
-    @CrossOrigin("*")
     @PostMapping("/addMessage")
+    @CrossOrigin("*")
     public String addMessage(@ModelAttribute Message message, Model model) {
-        message.setUserName(userRepo.findOne(1L).getUserName());
+        //message.setUserName(userRepo.findOne(1L).getUserName());
         RestTemplate restTemplate = new RestTemplate();
         Response response = new Response(message, new Client ("Alex"));
-        Status s = restTemplate.postForObject("http://localhost:8080/api/message/receive", response, Status.class);
+        HttpEntity<Response> httpEntity = new HttpEntity<>(response);
+        Status s = restTemplate.postForObject("https://safe-tor-47532.herokuapp.com/api/message/receive", httpEntity, Status.class);
         return "redirect:/index";
     }
 }
